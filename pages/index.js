@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [username, setUsername] = useState("");
+  const [inputName, setInputName] = useState("");
 
   const projects = [
     {
@@ -24,8 +27,24 @@ export default function Home() {
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1000);
+    const storedUser = localStorage.getItem("username");
+    if (storedUser) setUsername(storedUser);
     return () => clearTimeout(timer);
   }, []);
+
+  const handleLogin = () => {
+    if (inputName.trim()) {
+      setUsername(inputName);
+      localStorage.setItem("username", inputName);
+      setIsModalOpen(false);
+      setInputName("");
+    }
+  };
+
+  const handleLogout = () => {
+    setUsername("");
+    localStorage.removeItem("username");
+  };
 
   return (
     <html lang="en" className={darkMode ? "dark" : ""}>
@@ -74,20 +93,28 @@ export default function Home() {
             <header className="sticky top-0 z-50 bg-white/80 dark:bg-black/80 backdrop-blur border-b border-gray-300 dark:border-gray-700">
               <div className="flex justify-between items-center px-6 py-4 max-w-5xl mx-auto">
                 <h1 className="text-2xl font-bold">My Web Projects</h1>
-
                 <div className="flex items-center gap-4">
-                  <button
-                    className="text-sm px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded-md"
-                    onClick={() => alert("Sign In Clicked")}
-                  >
-                    Sign In
-                  </button>
-                  <button
-                    className="text-sm px-3 py-1 bg-gray-700 hover:bg-gray-800 text-white rounded-md"
-                    onClick={() => alert("Login Clicked")}
-                  >
-                    Login
-                  </button>
+                  {username ? (
+                    <>
+                      <span className="text-sm">Welcome, {username}</span>
+                      <button
+                        className="text-sm px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-md"
+                        onClick={handleLogout}
+                      >
+                        Logout
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        className="text-sm px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded-md"
+                        onClick={() => setIsModalOpen(true)}
+                      >
+                        Sign In
+                      </button>
+                    </>
+                  )}
+
                   <button
                     onClick={() => setDarkMode(!darkMode)}
                     className="p-2 bg-gray-200 dark:bg-gray-800 rounded-full hover:scale-105 transition"
@@ -134,10 +161,39 @@ export default function Home() {
                 </div>
               </div>
             </main>
+
+            {isModalOpen && (
+              <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg w-80">
+                  <h2 className="text-xl font-bold mb-4">Sign In</h2>
+                  <input
+                    type="text"
+                    placeholder="Enter your name"
+                    className="w-full px-4 py-2 border rounded mb-4 text-black"
+                    value={inputName}
+                    onChange={(e) => setInputName(e.target.value)}
+                  />
+                  <div className="flex justify-end gap-2">
+                    <button
+                      onClick={() => setIsModalOpen(false)}
+                      className="px-3 py-1 rounded bg-gray-300 dark:bg-gray-700 text-black dark:text-white"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={handleLogin}
+                      className="px-3 py-1 rounded bg-blue-500 text-white hover:bg-blue-600"
+                    >
+                      Login
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </>
         )}
       </body>
     </html>
   );
-            }
-                      
+    }
+    
