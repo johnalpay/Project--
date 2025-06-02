@@ -93,9 +93,6 @@ export default function Home() {
           </div>
         ) : (
           <>
-            <header className="sticky top-0 z-50 bg-white/90 dark:bg-black/80 backdrop-blur border-b border-gray-300 dark:border-gray-700">
-              <div className="flex justify-between items-center px-6 py-4 max-w-5xl mx-auto">
-                <h1 className="text-2xl font-bold">My Web Projects</h1>
   <div className="flex items-center gap-2">
     <img
       src={`https://ui-avatars.com/api/?name=${encodeURIComponent(username)}&background=random&color=fff`}
@@ -111,6 +108,7 @@ export default function Home() {
     Logout
   </button>
 </>
+
                   ) : (
                     <>
                       <button
