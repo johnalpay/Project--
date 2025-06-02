@@ -98,24 +98,16 @@ export default function Home() {
                 <h1 className="text-2xl font-bold">My Web Projects</h1>
                 <div className="flex items-center gap-4">
                   {username ? (
-  <>
-    <div className="flex items-center gap-2">
-      <img
-        src={`https://ui-avatars.com/api/?name=${encodeURIComponent(username)}&background=0D8ABC&color=fff&size=32`}
-        alt="avatar"
-        className="w-8 h-8 rounded-full"
-      />
-      <span className="text-sm font-medium">{username}</span>
-    </div>
-    <button
-      className="text-sm px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-md"
-      onClick={handleLogout}
-    >
-      Logout
-    </button>
-  </>
-) : (
-                  
+                    <>
+                      <span className="text-sm">Welcome, {username}</span>
+                      <button
+                        className="text-sm px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-md"
+                        onClick={handleLogout}
+                      >
+                        Logout
+                      </button>
+                    </>
+                  ) : (
                     <>
                       <button
                         className="text-sm px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded-md"
@@ -177,65 +169,43 @@ export default function Home() {
             </section>
 
             {isModalOpen && (
-  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-    <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg w-80">
-      <h2 className="text-xl font-bold mb-4">{isLogin ? "Login" : "Sign Up"}</h2>
-      <input
-        type="text"
-        placeholder="Username"
-        className="w-full px-4 py-2 border rounded mb-3 text-black"
-        value={inputName}
-        onChange={(e) => setInputName(e.target.value)}
-        autoFocus
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        className="w-full px-4 py-2 border rounded mb-4 text-black"
-        value={inputPass}
-        onChange={(e) => setInputPass(e.target.value)}
-      />
-      <div className="flex justify-end gap-2 mb-2">
-        <button
-          onClick={() => setIsModalOpen(false)}
-          className="px-3 py-1 rounded bg-gray-300 dark:bg-gray-700 text-black dark:text-white"
-        >
-          Cancel
-        </button>
-        <button
-          onClick={handleLogin}
-          className="px-3 py-1 rounded bg-blue-500 text-white hover:bg-blue-600"
-        >
-          {isLogin ? "Login" : "Sign Up"}
-        </button>
-      </div>
-      <p className="text-sm text-center text-gray-600 dark:text-gray-300">
-        {isLogin ? (
-          <>
-            Don’t have an account?{" "}
-            <button
-              onClick={() => setIsLogin(false)}
-              className="text-blue-500 hover:underline"
-            >
-              Sign Up
-            </button>
-          </>
-        ) : (
-          <>
-            Already have an account?{" "}
-            <button
-              onClick={() => setIsLogin(true)}
-              className="text-blue-500 hover:underline"
-            >
-              Login
-            </button>
+              <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg w-80">
+                  <h2 className="text-xl font-bold mb-4">Sign In</h2>
+                  <input
+                    type="text"
+                    placeholder="Username"
+                    className="w-full px-4 py-2 border rounded mb-3 text-black"
+                    value={inputName}
+                    onChange={(e) => setInputName(e.target.value)}
+                    autoFocus
+                  />
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    className="w-full px-4 py-2 border rounded mb-4 text-black"
+                    value={inputPass}
+                    onChange={(e) => setInputPass(e.target.value)}
+                  />
+                  <div className="flex justify-end gap-2">
+                    <button
+                      onClick={() => setIsModalOpen(false)}
+                      className="px-3 py-1 rounded bg-gray-300 dark:bg-gray-700 text-black dark:text-white"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={handleLogin}
+                      className="px-3 py-1 rounded bg-blue-500 text-white hover:bg-blue-600"
+                    >
+                      Login
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </>
         )}
-      </p>
-    </div>
-  </div>
-)}
-  
       </main>
     </div>
   );
