@@ -6,6 +6,7 @@ export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [username, setUsername] = useState("");
   const [inputName, setInputName] = useState("");
+  const [inputPass, setInputPass] = useState("");
 
   const projects = [
     {
@@ -38,6 +39,7 @@ export default function Home() {
       localStorage.setItem("username", inputName);
       setIsModalOpen(false);
       setInputName("");
+      setInputPass("");
     }
   };
 
@@ -83,14 +85,14 @@ export default function Home() {
         />
       </head>
 
-      <body className="bg-gradient-to-br from-blue-100 to-white dark:from-gray-900 dark:to-black text-gray-900 dark:text-white transition-colors duration-300">
+      <body className="bg-gradient-to-br from-[#f2f4f8] to-[#d0e4ff] dark:from-gray-900 dark:to-black text-gray-900 dark:text-white transition-colors duration-300">
         {loading ? (
           <div className="h-screen flex items-center justify-center">
             <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
           </div>
         ) : (
           <>
-            <header className="sticky top-0 z-50 bg-white/80 dark:bg-black/80 backdrop-blur border-b border-gray-300 dark:border-gray-700">
+            <header className="sticky top-0 z-50 bg-white/90 dark:bg-black/80 backdrop-blur border-b border-gray-300 dark:border-gray-700">
               <div className="flex justify-between items-center px-6 py-4 max-w-5xl mx-auto">
                 <h1 className="text-2xl font-bold">My Web Projects</h1>
                 <div className="flex items-center gap-4">
@@ -131,20 +133,22 @@ export default function Home() {
             </header>
 
             <main className="flex flex-col items-center justify-center px-4 py-10">
-              <div className="max-w-4xl w-full">
-                <div className="grid sm:grid-cols-2 gap-6 mb-10 mt-6">
+              <div className="max-w-5xl w-full">
+                <div className="grid sm:grid-cols-2 gap-8 mb-10 mt-6">
                   {projects.map((proj, index) => (
                     <a
                       key={index}
                       href={proj.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`block bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 transform transition hover:scale-105 hover:shadow-xl animate-fadeIn`}
+                      className="group block bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 transform transition hover:scale-105 hover:shadow-2xl animate-fadeIn"
                       style={{ animationDelay: `${index * 0.1}s` }}
                     >
-                      <h2 className="text-2xl font-semibold mb-2">{proj.name}</h2>
-                      <p className="text-gray-600 dark:text-gray-300">{proj.description}</p>
-                      <span className="text-blue-600 dark:text-blue-400 text-sm mt-2 inline-block">Visit →</span>
+                      <h2 className="text-2xl font-semibold mb-2 group-hover:text-blue-600 transition">{proj.name}</h2>
+                      <p className="text-gray-600 dark:text-gray-300 mb-4">{proj.description}</p>
+                      <button className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium shadow hover:scale-105 transition">
+                        Visit Project →
+                      </button>
                     </a>
                   ))}
                 </div>
@@ -154,7 +158,7 @@ export default function Home() {
                     href="https://www.facebook.com/profile.php?id=61576992292379"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-full shadow hover:bg-blue-700 transition"
+                    className="inline-flex items-center px-5 py-2 bg-blue-600 text-white rounded-full shadow hover:bg-blue-700 transition"
                   >
                     <i className="fab fa-facebook-f mr-2"></i> Follow on Facebook
                   </a>
@@ -168,10 +172,18 @@ export default function Home() {
                   <h2 className="text-xl font-bold mb-4">Sign In</h2>
                   <input
                     type="text"
-                    placeholder="Enter your name"
-                    className="w-full px-4 py-2 border rounded mb-4 text-black"
+                    placeholder="Username"
+                    className="w-full px-4 py-2 border rounded mb-3 text-black"
                     value={inputName}
                     onChange={(e) => setInputName(e.target.value)}
+                    autoFocus
+                  />
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    className="w-full px-4 py-2 border rounded mb-4 text-black"
+                    value={inputPass}
+                    onChange={(e) => setInputPass(e.target.value)}
                   />
                   <div className="flex justify-end gap-2">
                     <button
@@ -195,5 +207,5 @@ export default function Home() {
       </body>
     </html>
   );
-    }
-    
+            }
+            
