@@ -98,16 +98,24 @@ export default function Home() {
                 <h1 className="text-2xl font-bold">My Web Projects</h1>
                 <div className="flex items-center gap-4">
                   {username ? (
-                    <>
-                      <span className="text-sm">Welcome, {username}</span>
-                      <button
-                        className="text-sm px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-md"
-                        onClick={handleLogout}
-                      >
-                        Logout
-                      </button>
-                    </>
-                  ) : (
+  <>
+    <div className="flex items-center gap-2">
+      <img
+        src={`https://ui-avatars.com/api/?name=${encodeURIComponent(username)}&background=0D8ABC&color=fff&size=32`}
+        alt="avatar"
+        className="w-8 h-8 rounded-full"
+      />
+      <span className="text-sm font-medium">{username}</span>
+    </div>
+    <button
+      className="text-sm px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-md"
+      onClick={handleLogout}
+    >
+      Logout
+    </button>
+  </>
+) : (
+                  
                     <>
                       <button
                         className="text-sm px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded-md"
