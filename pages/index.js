@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [username, setUsername] = useState("");
@@ -28,7 +28,7 @@ export default function Home() {
   ];
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1000);
+    const timer = setTimeout(() => setLoading(false), 800);
     const storedUser = localStorage.getItem("username");
     if (storedUser) setUsername(storedUser);
     return () => clearTimeout(timer);
@@ -39,8 +39,6 @@ export default function Home() {
       setUsername(inputName);
       localStorage.setItem("username", inputName);
       setIsModalOpen(false);
-      setInputName("");
-      setInputPass("");
     }
   };
 
@@ -55,116 +53,78 @@ export default function Home() {
         <title>My Projects Portfolio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="https://cdn.tailwindcss.com"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-            tailwind.config = {
-              darkMode: 'class',
-              theme: {
-                extend: {
-                  animation: {
-                    fadeIn: "fadeIn 1s ease-out both"
-                  },
-                  keyframes: {
-                    fadeIn: {
-                      '0%': { opacity: 0, transform: 'translateY(10px)' },
-                      '100%': { opacity: 1, transform: 'translateY(0)' }
-                    }
-                  }
-                }
-              }
-            }
-          `,
-          }}
-        />
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-          integrity="sha512-m0eK8t4QKpEGnFHjFLWo+kqJ3RfTtGUgZ2Nmrr+38RcyQF9iPnxNzcl3Kj1by93ePfU+/2tZP3TtrqgY66nG8g=="
-          crossOrigin="anonymous"
-          referrerPolicy="no-referrer"
-        />
       </Head>
 
-      <main className="bg-black text-white min-h-screen transition-colors duration-300">
+      <main className="bg-black text-white min-h-screen">
         {loading ? (
           <div className="h-screen flex items-center justify-center">
-            <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
+            <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-red-500"></div>
           </div>
         ) : (
           <>
-            <header className="sticky top-0 z-50 bg-white/90 dark:bg-black/80 backdrop-blur border-b border-gray-300 dark:border-gray-700">
-              <div className="flex justify-between items-center px-6 py-4 max-w-5xl mx-auto">
-                <h1 className="text-2xl font-bold">My Web Projects</h1>
-                <div className="flex items-center gap-4">
-                  {username ? (
-                    <>
-                      <span className="text-sm">Welcome, {username}</span>
-                      <button
-                        className="text-sm px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-md"
-                        onClick={handleLogout}
-                      >
-                        Logout
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      <button
-                        className="text-sm px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded-md"
-                        onClick={() => setIsModalOpen(true)}
-                      >
-                        Sign In
-                      </button>
-                    </>
-                  )}
-
+            <header className="sticky top-0 z-50 bg-black/80 backdrop-blur border-b border-gray-700 px-6 py-4 flex justify-between items-center max-w-5xl mx-auto">
+              <h1 className="text-2xl font-bold">My Web Projects</h1>
+              <div className="flex gap-4 items-center">
+                {username ? (
+                  <>
+                    <span className="text-sm">Hi, {username}</span>
+                    <button
+                      onClick={handleLogout}
+                      className="text-sm px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-md"
+                    >
+                      Logout
+                    </button>
+                  </>
+                ) : (
                   <button
-                    onClick={() => setDarkMode(!darkMode)}
-                    className="p-2 bg-gray-200 dark:bg-gray-800 rounded-full hover:scale-105 transition"
-                    title="Toggle dark mode"
+                    className="text-sm px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-md"
+                    onClick={() => setIsModalOpen(true)}
                   >
-                    {darkMode ? (
-                      <i className="fas fa-sun text-yellow-400"></i>
-                    ) : (
-                      <i className="fas fa-moon text-gray-700"></i>
-                    )}
+                    Sign In
                   </button>
-                </div>
+                )}
+                <button
+                  onClick={() => setDarkMode(!darkMode)}
+                  className="p-2 bg-gray-800 rounded-full hover:scale-105 transition"
+                >
+                  {darkMode ? "🌙" : "☀️"}
+                </button>
               </div>
             </header>
 
-            <section className="flex flex-col items-center justify-center px-4 py-10">
-              <div className="max-w-5xl w-full">
-                <div className="grid sm:grid-cols-2 gap-8 mb-10 mt-6 bg-red-600 p-6 rounded-xl">
+            <section className="py-12 px-4">
+              <div className="max-w-5xl mx-auto bg-red-700 p-6 sm:p-10 rounded-2xl shadow-xl">
+                <div className="grid sm:grid-cols-2 gap-8">
                   {projects.map((proj, index) => (
-                    <a
+                    <div
                       key={index}
-                      href={proj.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group block bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 transform transition hover:scale-105 hover:shadow-2xl animate-fadeIn"
-                      style={{ animationDelay: `${index * 0.1}s` }}
+                      className="bg-gray-900 rounded-xl p-6 shadow-md transform transition duration-300 hover:scale-[1.03] hover:shadow-2xl"
                     >
-                      <h2 className="text-2xl font-semibold mb-2 group-hover:text-blue-600 transition">
+                      <h2 className="text-2xl font-semibold mb-2 text-white">
                         {proj.name}
                       </h2>
-                      <p className="text-gray-600 dark:text-gray-300 mb-4">{proj.description}</p>
-                      <button className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium shadow hover:scale-105 transition">
-                        Visit Project →
-                      </button>
-                    </a>
+                      <p className="text-gray-300 mb-4">{proj.description}</p>
+                      <a
+                        href={proj.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="relative inline-flex items-center px-5 py-2 font-medium text-white group"
+                      >
+                        <span className="absolute inset-0 w-full h-full transition duration-300 ease-out transform translate-x-1 translate-y-1 bg-gradient-to-r from-purple-600 to-blue-600 group-hover:-translate-x-0 group-hover:-translate-y-0 rounded-full"></span>
+                        <span className="absolute inset-0 w-full h-full bg-black rounded-full border border-white group-hover:border-transparent"></span>
+                        <span className="relative">Visit Project</span>
+                      </a>
+                    </div>
                   ))}
                 </div>
 
-                <div className="flex justify-center">
+                <div className="flex justify-center mt-10">
                   <a
                     href="https://www.facebook.com/profile.php?id=61576992292379"
                     target="_blank"
-                    className="mt-6 inline-flex items-center px-6 py-3 bg-rose-600 hover:bg-rose-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 animate-bounce"
+                    className="inline-flex items-center px-6 py-3 bg-pink-600 hover:bg-pink-700 text-white font-semibold rounded-lg shadow-lg transition-all transform hover:scale-105"
                   >
-                    <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M22 12a10 10 0 1 0-11.6 9.87v-6.99H8v-2.88h2.4V9.29c0-2.38 1.42-3.7 3.6-3.7 1.04 0 2.13.18 2.13.18v2.35h-1.2c-1.18 0-1.55.73-1.55 1.48v1.78h2.64l-.42 2.88h-2.22v6.99A10 10 0 0 0 22 12z" />
-                    </svg>
+                    <i className="fab fa-facebook-f mr-2" />
                     Follow me on Facebook
                   </a>
                 </div>
@@ -172,13 +132,13 @@ export default function Home() {
             </section>
 
             {isModalOpen && (
-              <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-                <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg w-80">
+              <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50">
+                <div className="bg-white text-black p-6 rounded-lg w-80">
                   <h2 className="text-xl font-bold mb-4">Sign In</h2>
                   <input
                     type="text"
                     placeholder="Username"
-                    className="w-full px-4 py-2 border rounded mb-3 text-black"
+                    className="w-full px-3 py-2 border rounded mb-3"
                     value={inputName}
                     onChange={(e) => setInputName(e.target.value)}
                     autoFocus
@@ -186,20 +146,20 @@ export default function Home() {
                   <input
                     type="password"
                     placeholder="Password"
-                    className="w-full px-4 py-2 border rounded mb-4 text-black"
+                    className="w-full px-3 py-2 border rounded mb-4"
                     value={inputPass}
                     onChange={(e) => setInputPass(e.target.value)}
                   />
                   <div className="flex justify-end gap-2">
                     <button
                       onClick={() => setIsModalOpen(false)}
-                      className="px-3 py-1 rounded bg-gray-300 dark:bg-gray-700 text-black dark:text-white"
+                      className="px-3 py-1 bg-gray-300 rounded"
                     >
                       Cancel
                     </button>
                     <button
                       onClick={handleLogin}
-                      className="px-3 py-1 rounded bg-blue-500 text-white hover:bg-blue-600"
+                      className="px-3 py-1 bg-blue-600 text-white rounded"
                     >
                       Login
                     </button>
@@ -212,5 +172,4 @@ export default function Home() {
       </main>
     </div>
   );
-            }
-                    
+                                                   }
