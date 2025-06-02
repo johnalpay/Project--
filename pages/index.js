@@ -156,14 +156,15 @@ export default function Home() {
 
                 <div className="flex justify-center">
                   <a
-                    href="https://www.facebook.com/profile.php?id=61576992292379"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center px-5 py-2 bg-blue-600 text-white rounded-full shadow hover:bg-blue-700 transition"
-                  >
-                    <i className="fab fa-facebook-f mr-2"></i> Follow on Facebook
-                  </a>
-                </div>
+  href="https://www.facebook.com/profile.php?id=61576992292379"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-full flex items-center justify-center space-x-2 shadow-md"
+>
+  <img src="/facebook-logo.png" alt="Facebook" className="w-5 h-5" />
+  <span>Follow on Facebook</span>
+</a>
+             </div>
               </div>
             </section>
 
