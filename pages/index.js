@@ -157,15 +157,14 @@ export default function Home() {
                 </div>
 
                 <div className="flex justify-center">
-                  <a href="https://www.facebook.com/profile.php?id=61576992292379" 
-   class="flex items-center justify-center gap-2 px-5 py-3 mt-6 text-white text-lg font-semibold bg-[#e50914] hover:bg-red-600 transition rounded-full shadow-md">
-   <svg class="w-5 h-5 fill-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-     <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879v-6.987H7.898v-2.892h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.463h-1.26c-1.243 0-1.63.772-1.63 1.562v1.875h2.773l-.443 2.892h-2.33v6.987C18.343 21.128 22 16.991 22 12z"/>
-   </svg>
-   Follow me on Facebook
+                  <a href="https://www.facebook.com/profile.php?id=61576992292379" target="_blank"
+  class="mt-6 inline-flex items-center px-6 py-3 bg-rose-600 hover:bg-rose-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 animate-bounce">
+  <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M22 12a10 10 0 1 0-11.6 9.87v-6.99H8v-2.88h2.4V9.29c0-2.38 1.42-3.7 3.6-3.7 1.04 0 2.13.18 2.13.18v2.35h-1.2c-1.18 0-1.55.73-1.55 1.48v1.78h2.64l-.42 2.88h-2.22v6.99A10 10 0 0 0 22 12z"/>
+  </svg>
+  Follow me on Facebook
 </a>
-     
-                </div>
+         </div>
               </div>
             </section>
 
