@@ -55,7 +55,9 @@ export default function Home() {
         <script src="https://cdn.tailwindcss.com"></script>
       </Head>
 
-      <main className="bg-black text-white min-h-screen">
+      <main className="bg-black text-white min-h-screen relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-red-900 via-black to-red-800 opacity-10 pointer-events-none"></div>
+
         {loading ? (
           <div className="h-screen flex items-center justify-center">
             <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-red-500"></div>
@@ -93,12 +95,12 @@ export default function Home() {
             </header>
 
             <section className="py-12 px-4">
-              <div className="max-w-5xl mx-auto bg-red-700 p-6 sm:p-10 rounded-2xl shadow-xl">
+              <div className="max-w-5xl mx-auto bg-red-700 p-6 sm:p-10 rounded-2xl shadow-2xl transform transition duration-500 hover:scale-[1.01]">
                 <div className="grid sm:grid-cols-2 gap-8">
                   {projects.map((proj, index) => (
                     <div
                       key={index}
-                      className="bg-gray-900 rounded-xl p-6 shadow-md transform transition duration-300 hover:scale-[1.03] hover:shadow-2xl"
+                      className="bg-gray-900 rounded-xl p-6 shadow-xl transform transition duration-500 hover:scale-[1.05] hover:shadow-[0_0_20px_rgba(255,0,0,0.5)] hover:rotate-[0.5deg] hover:-translate-y-1"
                     >
                       <h2 className="text-2xl font-semibold mb-2 text-white">
                         {proj.name}
@@ -108,9 +110,9 @@ export default function Home() {
                         href={proj.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="relative inline-flex items-center px-5 py-2 font-medium text-white group"
+                        className="relative inline-flex items-center px-5 py-2 font-medium text-white group transition-all duration-300"
                       >
-                        <span className="absolute inset-0 w-full h-full transition duration-300 ease-out transform translate-x-1 translate-y-1 bg-gradient-to-r from-purple-600 to-blue-600 group-hover:-translate-x-0 group-hover:-translate-y-0 rounded-full"></span>
+                        <span className="absolute inset-0 w-full h-full transition transform translate-x-1 translate-y-1 bg-gradient-to-r from-purple-600 to-blue-600 group-hover:-translate-x-0 group-hover:-translate-y-0 rounded-full blur-sm"></span>
                         <span className="absolute inset-0 w-full h-full bg-black rounded-full border border-white group-hover:border-transparent"></span>
                         <span className="relative">Visit Project</span>
                       </a>
@@ -133,7 +135,7 @@ export default function Home() {
 
             {isModalOpen && (
               <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50">
-                <div className="bg-white text-black p-6 rounded-lg w-80">
+                <div className="bg-white text-black p-6 rounded-lg w-80 animate-fade-in">
                   <h2 className="text-xl font-bold mb-4">Sign In</h2>
                   <input
                     type="text"
@@ -172,4 +174,5 @@ export default function Home() {
       </main>
     </div>
   );
-                                                   }
+          }
+                        
