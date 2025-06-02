@@ -53,6 +53,10 @@ export default function Home() {
         <title>My Projects Portfolio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="https://cdn.tailwindcss.com"></script>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        />
       </Head>
 
       <main className="bg-black text-white min-h-screen relative overflow-hidden">
@@ -126,7 +130,7 @@ export default function Home() {
                     target="_blank"
                     className="inline-flex items-center px-6 py-3 bg-pink-600 hover:bg-pink-700 text-white font-semibold rounded-lg shadow-lg transition-all transform hover:scale-105"
                   >
-                    <i className="fab fa-facebook-f mr-2" />
+                    <i className="fab fa-facebook-f mr-3 text-lg" />
                     Follow me on Facebook
                   </a>
                 </div>
@@ -175,4 +179,4 @@ export default function Home() {
     </div>
   );
           }
-                        
+                    
