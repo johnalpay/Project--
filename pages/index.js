@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -49,8 +50,8 @@ export default function Home() {
   };
 
   return (
-    <html lang="en" className={darkMode ? "dark" : ""}>
-      <head>
+    <div className={darkMode ? "dark" : ""}>
+      <Head>
         <title>My Projects Portfolio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="https://cdn.tailwindcss.com"></script>
@@ -83,9 +84,9 @@ export default function Home() {
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
-      </head>
+      </Head>
 
-      <body className="bg-gradient-to-br from-[#f2f4f8] to-[#d0e4ff] dark:from-gray-900 dark:to-black text-gray-900 dark:text-white transition-colors duration-300">
+      <main className="bg-gradient-to-br from-[#f2f4f8] to-[#d0e4ff] dark:from-gray-900 dark:to-black text-gray-900 dark:text-white min-h-screen transition-colors duration-300">
         {loading ? (
           <div className="h-screen flex items-center justify-center">
             <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
@@ -132,7 +133,7 @@ export default function Home() {
               </div>
             </header>
 
-            <main className="flex flex-col items-center justify-center px-4 py-10">
+            <section className="flex flex-col items-center justify-center px-4 py-10">
               <div className="max-w-5xl w-full">
                 <div className="grid sm:grid-cols-2 gap-8 mb-10 mt-6">
                   {projects.map((proj, index) => (
@@ -164,7 +165,7 @@ export default function Home() {
                   </a>
                 </div>
               </div>
-            </main>
+            </section>
 
             {isModalOpen && (
               <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
@@ -204,8 +205,8 @@ export default function Home() {
             )}
           </>
         )}
-      </body>
-    </html>
+      </main>
+    </div>
   );
             }
-            
+                        
